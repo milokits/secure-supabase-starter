@@ -1,0 +1,29 @@
+name: ci
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [22, 24]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - name: Guard and bundle-check tests
+        run: npm test
+      - name: Migration + two-account RLS checks (offline, PGlite)
+        run: npm run test:sql
+      - name: Build (placeholder public values) and scan the bundle
+        run: npm run build
+        env:
+          VITE_SUPABASE_URL: https://example-project.supabase.co
+          VITE_SUPABASE_ANON_KEY: sb_publishable_ci_placeholder
