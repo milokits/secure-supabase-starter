@@ -1,0 +1,35 @@
+{
+  "name": "secure-supabase-starter",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Minimal Vite + React + Supabase starter with RLS on every table, per-user policies, a two-account RLS test and security headers. By Milo Kits.",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node scripts/check-bundle.mjs",
+    "preview": "vite preview",
+    "check:bundle": "node scripts/check-bundle.mjs",
+    "test:rls": "node scripts/rls-two-account-test.mjs",
+    "test": "node --test scripts/starter.test.mjs",
+    "test:sql": "node supabase/tests/pglite-rls-selftest.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.118.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.2",
+    "vite": "^8.3.5",
+    "@electric-sql/pglite": "^0.5.11"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/milokits/secure-supabase-starter.git"
+  },
+  "homepage": "https://milokits.com"
+}

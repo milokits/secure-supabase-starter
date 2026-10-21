@@ -1,0 +1,13 @@
+# Netlify build settings. Security headers live in public/_headers (copied into dist/ on build).
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Single-page app: send unknown paths to index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
